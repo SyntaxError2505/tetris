@@ -56,7 +56,7 @@ void grid::draw(SDL_Renderer *renderer){
 
 			}
 
-			SDL_RenderRect(renderer, &square);
+			SDL_RenderFillRect(renderer, &square);
 		}
 	}
 }
