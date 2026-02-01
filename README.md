@@ -1,7 +1,6 @@
 # Tetris
-## My take on Tetris written in C++ using SDL3
-
-## WIP, Game is not currently playable
+My take on Tetris written in C++ using SDL3  
+WIP, Game is not currently playable  
   
 ## Building from source
 ### Dependencies
