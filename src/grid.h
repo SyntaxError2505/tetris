@@ -32,6 +32,10 @@ class grid{
 	std::vector<std::vector<cell>> grid_vector;
 
 	grid();
+	// makes cells fall if cell below is clear
+	void update_gravity();
+	// returns if a controlled piece is on the grid
+	bool check_piece();
 
 	void draw(SDL_Renderer* renderer);
 };
