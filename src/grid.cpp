@@ -63,9 +63,9 @@ void grid::draw(SDL_Renderer *renderer){
 
 void grid::update_gravity(){
 	//  start at SECOND row from bottom
-	for(int i = ROWS; i >= 0; i--){
+	for(int i = ROWS - 2; i >= 0; i--){
 		for(int j = 0; j < COLOUMNS; j++){
-			if(this->grid_vector[j][i].type != piece::BLACK && this->grid_vector[j+1][i].type == piece::BLACK){
+			if(this->grid_vector[i][j].type != piece::BLACK && this->grid_vector[i+1][j].type == piece::BLACK){
 				// makes current cell black and cell below the color of the cell above
 				this->grid_vector[i + 1][j].type = this->grid_vector[i][j].type;
 				this->grid_vector[i][j].type = piece::BLACK;

@@ -26,6 +26,9 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
     if (event->type == SDL_EVENT_QUIT) {
     	return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
     }
+	if(event->type == SDL_EVENT_KEY_UP && event->key.key == SDLK_G){
+		game_grid.update_gravity();
+	}
     return SDL_APP_CONTINUE;
 }
 SDL_AppResult SDL_AppIterate(void *appstate)
