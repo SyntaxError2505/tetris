@@ -18,6 +18,8 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         SDL_Log("Couldn't create window and renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
+
+	game_grid.grid_vector[0][5].type = piece::ORANGE;
     return SDL_APP_CONTINUE;
 }
 
