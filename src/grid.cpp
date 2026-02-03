@@ -1,5 +1,6 @@
 #include"grid.h"
 #include <vector>
+#include <iostream>
 
 #include <SDL3/SDL_render.h>
 
@@ -61,6 +62,14 @@ void grid::draw(SDL_Renderer *renderer){
 	}
 }
 
+void grid::reset_moved(){
+	for(int i = 0; i < ROWS; i++){
+		for(int j = 0; j < COLOUMNS; j++){
+			this->grid_vector[i][j].moved = false;
+		}
+	}
+}
+
 void grid::update_gravity(){
 	//  start at SECOND row from bottom
 	for(int i = ROWS - 2; i >= 0; i--){
@@ -68,7 +77,47 @@ void grid::update_gravity(){
 			if(this->grid_vector[i][j].type != piece::BLACK && this->grid_vector[i+1][j].type == piece::BLACK){
 				// makes current cell black and cell below the color of the cell above
 				this->grid_vector[i + 1][j].type = this->grid_vector[i][j].type;
+				this->grid_vector[i + 1][j].current_part = this->grid_vector[i][j].current_part;
 				this->grid_vector[i][j].type = piece::BLACK;
+				this->grid_vector[i][j].current_part = false;
+			}
+		}
+	}
+}
+
+void grid::move_left(){
+	this->reset_moved();
+
+	for(int i = 0; i < ROWS; i++){
+		//starts at SECOND coloumn form left
+		for(int j = COLOUMNS - 1; j > 0; j--){
+			if(this->grid_vector[i][j].current_part && !this->grid_vector[i][j].moved && this->grid_vector[i][j - 1].type == piece::BLACK){
+				std::cout << "moving left at Y: " << i << " X: " << j << "\n";
+				// makes current cell black and cell below the color of the cell above
+				this->grid_vector[i][j - 1].type = this->grid_vector[i][j].type;
+				this->grid_vector[i][j - 1].current_part = true;
+				this->grid_vector[i][j - 1].moved = true;
+				this->grid_vector[i][j].type = piece::BLACK;
+				this->grid_vector[i][j].current_part = false;
+			}
+		}
+	}
+}
+
+void grid::move_right(){
+	this->reset_moved();
+
+	for(int i = 0; i < ROWS; i++){
+		//starts at SECOND coloumn form right
+		for(int j = COLOUMNS - 2; j >= 0; j--){
+			if(this->grid_vector[i][j].current_part && !this->grid_vector[i][j].moved && this->grid_vector[i][j + 1].type == piece::BLACK){
+				std::cout << "moving right at Y: " << i << " X: " << j << "\n";
+				// makes current cell black and cell below the color of the cell above
+				this->grid_vector[i][j + 1].type = this->grid_vector[i][j].type;
+				this->grid_vector[i][j + 1].current_part = true;
+				this->grid_vector[i][j + 1].moved = true;
+				this->grid_vector[i][j].type = piece::BLACK;
+				this->grid_vector[i][j].current_part = false;
 			}
 		}
 	}

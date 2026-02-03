@@ -1,9 +1,9 @@
+#include <SDL3/SDL_keycode.h>
 #include <SDL3/SDL_oldnames.h>
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_stdinc.h>
 #include <SDL3/SDL_timer.h>
 #include <SDL3/SDL_video.h>
-#include <iostream>
 #define SDL_MAIN_USE_CALLBACKS 1  /* use the callbacks instead of main() */
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
@@ -29,6 +29,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     }
 
 	game_grid.grid_vector[0][5].type = piece::ORANGE;
+	game_grid.grid_vector[0][5].current_part = true;
     return SDL_APP_CONTINUE;
 }
 
@@ -37,8 +38,14 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
     if (event->type == SDL_EVENT_QUIT) {
     	return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
     }
-	if(event->type == SDL_EVENT_KEY_UP && event->key.key == SDLK_G){
+	if(event->type == SDL_EVENT_KEY_UP && event->key.key == SDLK_S){
 		game_grid.update_gravity();
+	}
+	if(event->type == SDL_EVENT_KEY_UP && event->key.key == SDLK_A){
+		game_grid.move_left();
+	}
+	if(event->type == SDL_EVENT_KEY_UP && event->key.key == SDLK_D){
+		game_grid.move_right();
 	}
     return SDL_APP_CONTINUE;
 }
@@ -55,8 +62,6 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 		game_grid.update_gravity();
 		last_update = SDL_GetTicks();
 	}
-
-	std::cout << "Timer: " << timer << "\n";
 
 	game_grid.draw(renderer);
     SDL_RenderPresent(renderer);

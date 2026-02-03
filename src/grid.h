@@ -22,6 +22,7 @@ class cell{
 	// if true: is influenced by keystrokes
 	public:
 	bool current_part;
+	bool moved;
 	piece type;
 	cell(piece type);
 };
@@ -34,6 +35,11 @@ class grid{
 	grid();
 	// makes cells fall if cell below is clear
 	void update_gravity();
+	void move_left();
+	void move_right();
+
+	void reset_moved();
+
 	// returns if a controlled piece is on the grid
 	bool check_piece();
 
