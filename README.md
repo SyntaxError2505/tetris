@@ -31,7 +31,7 @@ git clone https://github.com/SyntaxError2505/tetris.git && cd tetris
 
 Clone SDL3 into the Repo:  
 ```shell
-git clone https://github.com/libsdl-org/SDL.git ./third-party
+git clone https://github.com/libsdl-org/SDL.git ./third-party/SDL
 ```
 
 Build with Cmake:  
