@@ -90,7 +90,7 @@ void grid::move_left(){
 
 	for(int i = 0; i < ROWS; i++){
 		//starts at SECOND coloumn form left
-		for(int j = COLOUMNS - 1; j > 0; j--){
+		for(int j = 1; j < COLOUMNS; j++){
 			if(this->grid_vector[i][j].current_part && !this->grid_vector[i][j].moved && this->grid_vector[i][j - 1].type == piece::BLACK){
 				std::cout << "moving left at Y: " << i << " X: " << j << "\n";
 				// makes current cell black and cell below the color of the cell above
