@@ -42,6 +42,7 @@ class grid{
 
 	// returns if a controlled piece is on the grid
 	bool check_piece();
+	void delete_full_rows();
 
 	void draw(SDL_Renderer* renderer);
 };

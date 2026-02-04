@@ -39,7 +39,8 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
     	return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
     }
 	if(event->type == SDL_EVENT_KEY_UP && event->key.key == SDLK_S){
-		game_grid.update_gravity();
+		game_grid.grid_vector[0][3].type = piece::GREEN;
+		game_grid.grid_vector[0][3].current_part = true;
 	}
 	if(event->type == SDL_EVENT_KEY_UP && event->key.key == SDLK_A){
 		game_grid.move_left();
@@ -60,6 +61,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 	if(timer >= UPDATE_SPEED_ms){
 		timer = 0;
 		game_grid.update_gravity();
+		game_grid.delete_full_rows();
 		last_update = SDL_GetTicks();
 	}
 

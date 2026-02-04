@@ -122,3 +122,23 @@ void grid::move_right(){
 		}
 	}
 }
+
+void grid::delete_full_rows(){
+	for(int i = 0; i < ROWS; i++){
+		bool full = true;
+
+		for(int j = 0; j < COLOUMNS; j++){
+			if(this->grid_vector[i][j].type == piece::BLACK){
+				full = false;
+			}
+		}
+
+		if(full){
+			for(int j = 0; j < COLOUMNS; j++){
+				this->grid_vector[i][j].type = piece::BLACK;
+
+				std::cout << "Removed piece at X: " << j << " Y: " << i << "\n";
+			}
+		}
+	}
+}
