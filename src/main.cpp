@@ -10,7 +10,7 @@
 
 #include"grid.h"
 
-#define UPDATE_SPEED_ms 500
+#define UPDATE_SPEED_ms 300
 
 SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;

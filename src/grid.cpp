@@ -71,14 +71,21 @@ void grid::reset_moved(){
 }
 
 void grid::update_gravity(){
+	for(int i = 0; i < COLOUMNS; i++){
+		this->grid_vector[ROWS - 1][i].current_part = false;
+	}
+
 	//  start at SECOND row from bottom
 	for(int i = ROWS - 2; i >= 0; i--){
 		for(int j = 0; j < COLOUMNS; j++){
-			if(this->grid_vector[i][j].type != piece::BLACK && this->grid_vector[i+1][j].type == piece::BLACK){
+			if(this->grid_vector[i][j].type != piece::BLACK && this->grid_vector[i+1][j].type == piece::BLACK && this->grid_vector[i][j].current_part){
 				// makes current cell black and cell below the color of the cell above
 				this->grid_vector[i + 1][j].type = this->grid_vector[i][j].type;
 				this->grid_vector[i + 1][j].current_part = this->grid_vector[i][j].current_part;
 				this->grid_vector[i][j].type = piece::BLACK;
+				this->grid_vector[i][j].current_part = false;
+			}
+			else{
 				this->grid_vector[i][j].current_part = false;
 			}
 		}
