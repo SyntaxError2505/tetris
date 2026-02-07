@@ -34,6 +34,8 @@ Clone SDL3 into the Repo:
 git clone https://github.com/libsdl-org/SDL.git ./third-party/SDL
 ```
 
+Sdl requires some Dependencies. Cmake may stop on an error with a link to a list of required libraries.
+
 Build with Cmake:  
 ```shell
 mkdir build && cd build
